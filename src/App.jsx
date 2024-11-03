@@ -1,7 +1,6 @@
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
-import { useRef } from "react";
-import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useMemo, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
 import { findItems, LIMIT } from "./rpc";
@@ -10,19 +9,23 @@ import { Rating } from "./Rating";
 import { useController } from "./controller";
 import { AppContext } from "./hooks/useAppContext";
 
-const CATALOG_DATA_KEY = "catalog-search-history";
-const CATALOG_FILTERS_KEY = "catalog-filters-history";
-/** @import {Filters} from "./rpc" */
-/** @param { Filters } initialFilter */
-const initialFilter = {
-  rating: null,
-  price: null,
-  category: null,
-  brand: null,
-};
+function sortItems(items, ratingSort, priceSort) {
+  let sortedItems = [...items];
 
-/** @type {string[]} */
-const initialSearches = [];
+  if (ratingSort === "as lowest") {
+    sortedItems.sort((a, b) => a.rating - b.rating);
+  } else if (ratingSort === "as highest") {
+    sortedItems.sort((a, b) => b.rating - a.rating);
+  }
+
+  if (priceSort === "as lowest") {
+    sortedItems.sort((a, b) => a.price - b.price);
+  } else if (priceSort === "as highest") {
+    sortedItems.sort((a, b) => b.price - a.price);
+  }
+
+  return sortedItems;
+}
 
 function App() {
   const controller = useController();
@@ -31,22 +34,11 @@ function App() {
   /** @type {React.RefObject<HTMLDivElement>} */
   const scrollableParent = useRef(null);
 
-  const { isClosed, debouncedQuery, closeSidebar } = controller;
-  const [filters, setFilters] = useLocalStorage(
-    CATALOG_FILTERS_KEY,
-    initialFilter,
-  );
-  const [storedSearches, setStoreSearches] = useLocalStorage(
-    CATALOG_DATA_KEY,
-    initialSearches,
-  );
-
-  function addNewSearch(search) {
-    setStoreSearches((o) => [search, ...o.slice(0, 9)]);
-  }
+  const { isClosed, debouncedQuery, filters, ratingSort, priceSort } =
+    controller;
 
   const content = useInfiniteQuery({
-    queryKey: ["content", debouncedQuery],
+    queryKey: ["content", debouncedQuery, filters],
     queryFn: ({ pageParam: offset }) =>
       findItems(debouncedQuery, filters, offset ?? 0),
     getNextPageParam: nextPageParamGetter(LIMIT),
@@ -77,19 +69,20 @@ function App() {
 
   useInfiniteScroll(content, lastRowRef, 100, true, scrollableParent.current);
 
+  const sortedProducts = useMemo(() => {
+    if (!content.data) {
+      return;
+    }
+    const allProducts = content.data.pages.flatMap((page) => page);
+
+    return sortItems(allProducts, ratingSort, priceSort);
+  }, [content.data, ratingSort, priceSort]);
+
   return (
     <AppContext.Provider value={controller}>
       <div className="w-screen h-screen bg-gray-50">
-        <Header
-          closeSidebar={closeSidebar}
-          storedSearches={storedSearches}
-          addNewSearch={addNewSearch}
-        />
-        <Sidebar
-          isClosed={isClosed}
-          closeSidebar={closeSidebar}
-          filters={filters}
-        />
+        <Header />
+        <Sidebar />
 
         <div
           className={clsx(
@@ -100,22 +93,56 @@ function App() {
             "no-scrollbar transition-all duration-[170ms] ease-in-out",
           )}
         >
-          {content.isLoading && <div>Loading...</div>}
+          {content.isLoading && (
+            <div
+              className={clsx(
+                "flex w-full gap-[2px] tablet:gap-1",
+                "items-center justify-center",
+              )}
+            >
+              <div
+                className={clsx(
+                  "h-[14px] w-[14px] animate-loading rounded-full bg-gray-400",
+                  "[animation-delay:0.1s] tablet:h-[16px] tablet:w-[16px]",
+                )}
+              />
+              <div
+                className={clsx(
+                  "h-[14px] w-[14px] animate-loading rounded-full bg-gray-400",
+                  "[animation-delay:0.2s] tablet:h-[16px] tablet:w-[16px]",
+                )}
+              />
+              <div
+                className={clsx(
+                  "h-[14px] w-[14px] animate-loading rounded-full bg-gray-400",
+                  "[animation-delay:0.3s] tablet:h-[16px] tablet:w-[16px]",
+                )}
+              />
+            </div>
+          )}
           {content.isError && <div>Cant fatch data</div>}
-          <div
-            ref={scrollableParent}
-            className={clsx(
-              "w-full h-full overflow-y-scroll flex flex-col",
-              "gap-[20px] py-[20px] px-[16px]",
-            )}
-          >
-            {content.data &&
-              content.data.pages.flatMap((page) =>
-                page.map((item) => (
+          {content.data && (
+            <div
+              ref={scrollableParent}
+              className={clsx(
+                "w-full h-full overflow-y-scroll flex flex-col",
+                "gap-[20px] py-[20px] px-[16px] tablet:grid tablet:grid-cols-2",
+                "desktop:grid-cols-3",
+              )}
+            >
+              {sortedProducts.length === 0 ? (
+                <span
+                  key="no-products"
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2"
+                >
+                  No products found
+                </span>
+              ) : (
+                sortedProducts.map((item) => (
                   <div
                     key={item.id}
                     className={clsx(
-                      "bg-gray-200 w-full h-[230px] rounded-md flex",
+                      "bg-gray-200 w-full rounded-md flex",
                       "p-[8px] flex-col",
                     )}
                   >
@@ -124,15 +151,22 @@ function App() {
                         src={item.imageUrl}
                         className="w-[30px] h-[30px] rounded-full object-cover"
                       />
-                      {item.name}
+                      <div className="flex items-center gap-4">
+                        <span>{item.name}</span>
+                        <span>{item.price}$</span>
+                      </div>
                     </div>
                     <Rating rate={item.rating} />
-                    name category brand price rating imageUrl
+                    <div className="flex items-center justify-between w-full">
+                      <span>Brand: {item.brand}</span>
+                      <span>Category: {item.category}</span>
+                    </div>
                   </div>
-                )),
+                ))
               )}
-            <div ref={lastRowRef} />
-          </div>
+              <div ref={lastRowRef} />
+            </div>
+          )}
         </div>
       </div>
     </AppContext.Provider>

@@ -2,6 +2,26 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    animation: {
+      loading: "loading 1s ease-out infinite",
+    },
+    keyframes: {
+      loading: {
+        "0%": {
+          opacity: 0.4,
+          transform: "translateY(-3px)",
+        },
+        "50%": {
+          opacity: 1,
+          transform: "translateY(3px)",
+        },
+        "100%": {
+          opacity: 0.4,
+          transform: "translateY(-3px)",
+        },
+      },
+    },
+
     screens: {
       "mobile+": "640px",
       tablet: "768px",

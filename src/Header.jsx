@@ -1,26 +1,25 @@
 import clsx from "clsx";
 import { Menu, Search } from "lucide-react";
-import PropTypes from "prop-types";
 import { useState, useEffect, useContext } from "react";
 import { useShortCut } from "./hooks/useShortcut";
 import { AppContext } from "./hooks/useAppContext";
 
-const HeaderPropTypes = {
-  closeSidebar: PropTypes.func.isRequired,
-  storedSearches: PropTypes.arrayOf(PropTypes.string).isRequired,
-  addNewSearch: PropTypes.func.isRequired,
-};
-
-export function Header(props) {
+export function Header() {
   const controller = useContext(AppContext);
   if (!controller) {
     throw new Error("Missing DashboardContext.Provider in the tree");
   }
 
-  const { isClosed } = controller;
+  const {
+    isClosed,
+    query,
+    setQueryValue,
+    storedSearches,
+    addNewSearch,
+    closeSidebar,
+  } = controller;
 
   const [inputFocus, setInputFocus] = useState(false);
-  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -47,7 +46,9 @@ export function Header(props) {
   useShortCut({
     shortCut: "Enter",
     handler: () => {
-      console.log("enter");
+      if (query !== "") {
+        addNewSearch(query);
+      }
     },
     disabled: !inputFocus,
   });
@@ -70,7 +71,7 @@ export function Header(props) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              props.closeSidebar();
+              closeSidebar();
             }}
             className={clsx(
               "peer rounded-[6px] outline-none transition-all",
@@ -118,11 +119,11 @@ export function Header(props) {
           >
             <input
               placeholder="Search"
-              value={inputValue}
+              value={query}
               onChange={(e) => {
                 const inputValue = e.currentTarget.value;
                 if (inputValue.length <= 1000) {
-                  setInputValue(inputValue);
+                  setQueryValue(inputValue);
                 }
               }}
               className={clsx(
@@ -132,10 +133,8 @@ export function Header(props) {
             />
             <button
               onClick={() => {
-                // props.searchStock(inputValue);
-                // setStockLoading();
-                if (inputValue !== "") {
-                  props.addNewSearch(inputValue);
+                if (query !== "") {
+                  addNewSearch(query);
                 }
               }}
               className={clsx(
@@ -148,14 +147,14 @@ export function Header(props) {
             </button>
           </div>
 
-          {props.storedSearches && props.storedSearches.length !== 0 && (
+          {storedSearches && storedSearches.length !== 0 && (
             <div
               className={clsx(
                 inputFocus ? "flex" : "hidden",
                 "absolute left-0 top-[54px] flex-col rounded-[8px]",
                 "gap-[2px] py-[12px]",
                 "no-scrollbar max-h-[254px] w-full overflow-y-scroll",
-                "searches-container z-40 bg-gray-200",
+                "searches-container z-40 bg-gray-300",
               )}
             >
               <span
@@ -167,14 +166,12 @@ export function Header(props) {
                 Search history
               </span>
               <div className="searches-container flex flex-col">
-                {props.storedSearches.map((s, index) => (
+                {storedSearches.map((s, index) => (
                   <button
                     key={index}
                     onClick={() => {
-                      setInputValue(s);
-                      // searchStock(s);
+                      setQueryValue(s);
                       setInputFocus(false);
-                      // setStockLoading();
                     }}
                     className={clsx(
                       "h-[40px] w-full px-[16px] hover:bg-gray-300",
@@ -199,5 +196,3 @@ export function Header(props) {
     </>
   );
 }
-
-Header.propTypes = HeaderPropTypes;

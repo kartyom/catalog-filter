@@ -10,26 +10,19 @@ export const LIMIT = 12;
  * @property {number} rating
  * @property {string} imageUrl
  */
-/**
- * @typedef Range
- * @property {number} start
- * @property {number} end
- */
 
 /**
  * @typedef Filters
  * @property {string | null} category
  * @property {string | null} brand
- * @property {Range | null} rating
- * @property {Range | null} price
+ * @property {number | null} rating
+ * @property {number | null} price
  */
 
 export async function getAllCategories() {
   await sleep(1500);
 
-  /**
-   * @type Set<string>
-   */
+  /** @type Set<string> */
   const empty = new Set();
   const categories = data.reduce((categories, item) => {
     categories.add(item.category);
@@ -42,9 +35,7 @@ export async function getAllCategories() {
 export async function getAllBrands() {
   await sleep(1500);
 
-  /**
-   * @type Set<string>
-   */
+  /** @type Set<string> */
   const empty = new Set();
   const brands = data.reduce((brands, item) => {
     brands.add(item.brand);
@@ -79,7 +70,7 @@ export async function findItems(query, filters, offset, limit = LIMIT) {
 }
 
 /**
- * @param {Range | null} range
+ * @param {number | null} range
  */
 function isPriceInRange(range) {
   /**
@@ -90,11 +81,7 @@ function isPriceInRange(range) {
       return true;
     }
 
-    if (item.price < range.start) {
-      return false;
-    }
-
-    if (item.price > range.end) {
+    if (item.price > range) {
       return false;
     }
 
@@ -103,7 +90,7 @@ function isPriceInRange(range) {
 }
 
 /**
- * @param {Range | null} range
+ * @param {number | null} range
  */
 function isRatingInRange(range) {
   /**
@@ -114,11 +101,7 @@ function isRatingInRange(range) {
       return true;
     }
 
-    if (item.rating < range.start) {
-      return false;
-    }
-
-    if (item.rating > range.end) {
+    if (item.rating > range) {
       return false;
     }
 
@@ -196,7 +179,7 @@ const data = [
     brand: "Brand E",
     price: 75.34,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item1.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 2,
@@ -205,7 +188,7 @@ const data = [
     brand: "Brand G",
     price: 195.16,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item2.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 3,
@@ -214,7 +197,7 @@ const data = [
     brand: "Brand O",
     price: 155.8,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item3.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 4,
@@ -223,7 +206,7 @@ const data = [
     brand: "Brand N",
     price: 199.06,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item4.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 5,
@@ -232,7 +215,7 @@ const data = [
     brand: "Brand N",
     price: 431.01,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item5.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 6,
@@ -241,7 +224,7 @@ const data = [
     brand: "Brand J",
     price: 477.68,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item6.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 7,
@@ -250,7 +233,7 @@ const data = [
     brand: "Brand E",
     price: 115.35,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item7.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 8,
@@ -259,7 +242,7 @@ const data = [
     brand: "Brand F",
     price: 494.18,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item8.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 9,
@@ -268,7 +251,7 @@ const data = [
     brand: "Brand O",
     price: 476.84,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item9.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 10,
@@ -277,7 +260,7 @@ const data = [
     brand: "Brand A",
     price: 387.11,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item10.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 11,
@@ -286,7 +269,7 @@ const data = [
     brand: "Brand E",
     price: 340.37,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item11.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 12,
@@ -295,7 +278,7 @@ const data = [
     brand: "Brand L",
     price: 288.46,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item12.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 13,
@@ -304,7 +287,7 @@ const data = [
     brand: "Brand G",
     price: 231.65,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item13.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 14,
@@ -313,7 +296,7 @@ const data = [
     brand: "Brand B",
     price: 321.81,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item14.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 15,
@@ -322,7 +305,7 @@ const data = [
     brand: "Brand M",
     price: 462.46,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item15.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 16,
@@ -331,7 +314,7 @@ const data = [
     brand: "Brand B",
     price: 115.28,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item16.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 17,
@@ -340,7 +323,7 @@ const data = [
     brand: "Brand F",
     price: 342.33,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item17.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 18,
@@ -349,7 +332,7 @@ const data = [
     brand: "Brand M",
     price: 51.9,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item18.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 19,
@@ -358,7 +341,7 @@ const data = [
     brand: "Brand B",
     price: 307.77,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item19.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 20,
@@ -367,7 +350,7 @@ const data = [
     brand: "Brand K",
     price: 458.87,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item20.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 21,
@@ -376,7 +359,7 @@ const data = [
     brand: "Brand F",
     price: 236.03,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item21.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 22,
@@ -385,7 +368,7 @@ const data = [
     brand: "Brand B",
     price: 320.01,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item22.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 23,
@@ -394,7 +377,7 @@ const data = [
     brand: "Brand F",
     price: 23.6,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item23.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 24,
@@ -403,7 +386,7 @@ const data = [
     brand: "Brand B",
     price: 98.7,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item24.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 25,
@@ -412,7 +395,7 @@ const data = [
     brand: "Brand A",
     price: 277.02,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item25.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 26,
@@ -421,7 +404,7 @@ const data = [
     brand: "Brand N",
     price: 309.54,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item26.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 27,
@@ -430,7 +413,7 @@ const data = [
     brand: "Brand N",
     price: 355.81,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item27.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 28,
@@ -439,7 +422,7 @@ const data = [
     brand: "Brand G",
     price: 110.0,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item28.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 29,
@@ -448,7 +431,7 @@ const data = [
     brand: "Brand F",
     price: 245.17,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item29.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 30,
@@ -457,7 +440,7 @@ const data = [
     brand: "Brand E",
     price: 165.27,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item30.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 31,
@@ -466,7 +449,7 @@ const data = [
     brand: "Brand I",
     price: 258.23,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item31.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 32,
@@ -475,7 +458,7 @@ const data = [
     brand: "Brand A",
     price: 373.06,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item32.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 33,
@@ -484,7 +467,7 @@ const data = [
     brand: "Brand C",
     price: 146.21,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item33.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 34,
@@ -493,7 +476,7 @@ const data = [
     brand: "Brand O",
     price: 469.61,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item34.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 35,
@@ -502,7 +485,7 @@ const data = [
     brand: "Brand H",
     price: 184.42,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item35.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 36,
@@ -511,7 +494,7 @@ const data = [
     brand: "Brand G",
     price: 423.43,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item36.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 37,
@@ -520,7 +503,7 @@ const data = [
     brand: "Brand L",
     price: 168.6,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item37.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 38,
@@ -529,7 +512,7 @@ const data = [
     brand: "Brand I",
     price: 23.94,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item38.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 39,
@@ -538,7 +521,7 @@ const data = [
     brand: "Brand N",
     price: 362.67,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item39.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 40,
@@ -547,7 +530,7 @@ const data = [
     brand: "Brand H",
     price: 376.94,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item40.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 41,
@@ -556,7 +539,7 @@ const data = [
     brand: "Brand M",
     price: 445.2,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item41.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 42,
@@ -565,7 +548,7 @@ const data = [
     brand: "Brand G",
     price: 274.75,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item42.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 43,
@@ -574,7 +557,7 @@ const data = [
     brand: "Brand J",
     price: 58.22,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item43.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 44,
@@ -583,7 +566,7 @@ const data = [
     brand: "Brand C",
     price: 204.87,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item44.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 45,
@@ -592,7 +575,7 @@ const data = [
     brand: "Brand A",
     price: 223.63,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item45.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 46,
@@ -601,7 +584,7 @@ const data = [
     brand: "Brand I",
     price: 215.9,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item46.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 47,
@@ -610,7 +593,7 @@ const data = [
     brand: "Brand D",
     price: 322.3,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item47.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 48,
@@ -619,7 +602,7 @@ const data = [
     brand: "Brand D",
     price: 341.38,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item48.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 49,
@@ -628,7 +611,7 @@ const data = [
     brand: "Brand D",
     price: 255.09,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item49.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 50,
@@ -637,7 +620,7 @@ const data = [
     brand: "Brand M",
     price: 424.65,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item50.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 51,
@@ -646,7 +629,7 @@ const data = [
     brand: "Brand F",
     price: 382.24,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item51.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 52,
@@ -655,7 +638,7 @@ const data = [
     brand: "Brand G",
     price: 378.21,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item52.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 53,
@@ -664,7 +647,7 @@ const data = [
     brand: "Brand J",
     price: 87.75,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item53.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 54,
@@ -673,7 +656,7 @@ const data = [
     brand: "Brand E",
     price: 449.01,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item54.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 55,
@@ -682,7 +665,7 @@ const data = [
     brand: "Brand M",
     price: 114.11,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item55.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 56,
@@ -691,7 +674,7 @@ const data = [
     brand: "Brand D",
     price: 432.78,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item56.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 57,
@@ -700,7 +683,7 @@ const data = [
     brand: "Brand K",
     price: 289.43,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item57.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 58,
@@ -709,7 +692,7 @@ const data = [
     brand: "Brand J",
     price: 81.37,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item58.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 59,
@@ -718,7 +701,7 @@ const data = [
     brand: "Brand L",
     price: 244.08,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item59.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 60,
@@ -727,7 +710,7 @@ const data = [
     brand: "Brand K",
     price: 200.15,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item60.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 61,
@@ -736,7 +719,7 @@ const data = [
     brand: "Brand O",
     price: 72.05,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item61.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 62,
@@ -745,7 +728,7 @@ const data = [
     brand: "Brand E",
     price: 210.94,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item62.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 63,
@@ -754,7 +737,7 @@ const data = [
     brand: "Brand E",
     price: 458.47,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item63.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 64,
@@ -763,7 +746,7 @@ const data = [
     brand: "Brand I",
     price: 86.93,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item64.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 65,
@@ -772,7 +755,7 @@ const data = [
     brand: "Brand L",
     price: 404.77,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item65.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 66,
@@ -781,7 +764,7 @@ const data = [
     brand: "Brand E",
     price: 337.52,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item66.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 67,
@@ -790,7 +773,7 @@ const data = [
     brand: "Brand A",
     price: 359.98,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item67.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 68,
@@ -799,7 +782,7 @@ const data = [
     brand: "Brand C",
     price: 189.59,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item68.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 69,
@@ -808,7 +791,7 @@ const data = [
     brand: "Brand M",
     price: 211.06,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item69.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 70,
@@ -817,7 +800,7 @@ const data = [
     brand: "Brand N",
     price: 419.69,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item70.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 71,
@@ -826,7 +809,7 @@ const data = [
     brand: "Brand N",
     price: 367.64,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item71.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 72,
@@ -835,7 +818,7 @@ const data = [
     brand: "Brand I",
     price: 495.65,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item72.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 73,
@@ -844,7 +827,7 @@ const data = [
     brand: "Brand G",
     price: 267.66,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item73.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 74,
@@ -853,7 +836,7 @@ const data = [
     brand: "Brand E",
     price: 300.9,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item74.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 75,
@@ -862,7 +845,7 @@ const data = [
     brand: "Brand G",
     price: 436.85,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item75.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 76,
@@ -871,7 +854,7 @@ const data = [
     brand: "Brand I",
     price: 36.93,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item76.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 77,
@@ -880,7 +863,7 @@ const data = [
     brand: "Brand O",
     price: 416.42,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item77.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 78,
@@ -889,7 +872,7 @@ const data = [
     brand: "Brand D",
     price: 287.13,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item78.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 79,
@@ -898,7 +881,7 @@ const data = [
     brand: "Brand C",
     price: 153.22,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item79.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 80,
@@ -907,7 +890,7 @@ const data = [
     brand: "Brand C",
     price: 31.65,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item80.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 81,
@@ -916,7 +899,7 @@ const data = [
     brand: "Brand A",
     price: 279.19,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item81.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 82,
@@ -925,7 +908,7 @@ const data = [
     brand: "Brand K",
     price: 182.07,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item82.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 83,
@@ -934,7 +917,7 @@ const data = [
     brand: "Brand N",
     price: 24.01,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item83.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 84,
@@ -943,7 +926,7 @@ const data = [
     brand: "Brand H",
     price: 285.5,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item84.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 85,
@@ -952,7 +935,7 @@ const data = [
     brand: "Brand B",
     price: 248.46,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item85.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 86,
@@ -961,7 +944,7 @@ const data = [
     brand: "Brand F",
     price: 31.44,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item86.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 87,
@@ -970,7 +953,7 @@ const data = [
     brand: "Brand M",
     price: 235.26,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item87.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 88,
@@ -979,7 +962,7 @@ const data = [
     brand: "Brand J",
     price: 203.53,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item88.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 89,
@@ -988,7 +971,7 @@ const data = [
     brand: "Brand M",
     price: 165.78,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item89.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 90,
@@ -997,7 +980,7 @@ const data = [
     brand: "Brand A",
     price: 350.66,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item90.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 91,
@@ -1006,7 +989,7 @@ const data = [
     brand: "Brand O",
     price: 415.02,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item91.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 92,
@@ -1015,7 +998,7 @@ const data = [
     brand: "Brand D",
     price: 93.13,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item92.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 93,
@@ -1024,7 +1007,7 @@ const data = [
     brand: "Brand K",
     price: 445.99,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item93.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 94,
@@ -1033,7 +1016,7 @@ const data = [
     brand: "Brand K",
     price: 199.72,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item94.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 95,
@@ -1042,7 +1025,7 @@ const data = [
     brand: "Brand E",
     price: 378.83,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item95.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 96,
@@ -1051,7 +1034,7 @@ const data = [
     brand: "Brand F",
     price: 166.54,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item96.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 97,
@@ -1060,7 +1043,7 @@ const data = [
     brand: "Brand M",
     price: 61.1,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item97.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 98,
@@ -1069,7 +1052,7 @@ const data = [
     brand: "Brand L",
     price: 435.25,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item98.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 99,
@@ -1078,7 +1061,7 @@ const data = [
     brand: "Brand O",
     price: 85.7,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item99.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 100,
@@ -1087,7 +1070,7 @@ const data = [
     brand: "Brand J",
     price: 407.11,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item100.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 101,
@@ -1096,7 +1079,7 @@ const data = [
     brand: "Brand E",
     price: 356.92,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item101.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 102,
@@ -1105,7 +1088,7 @@ const data = [
     brand: "Brand E",
     price: 452.77,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item102.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 103,
@@ -1114,7 +1097,7 @@ const data = [
     brand: "Brand D",
     price: 467.71,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item103.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 104,
@@ -1123,7 +1106,7 @@ const data = [
     brand: "Brand N",
     price: 413.3,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item104.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 105,
@@ -1132,7 +1115,7 @@ const data = [
     brand: "Brand E",
     price: 330.95,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item105.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 106,
@@ -1141,7 +1124,7 @@ const data = [
     brand: "Brand I",
     price: 55.27,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item106.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 107,
@@ -1150,7 +1133,7 @@ const data = [
     brand: "Brand E",
     price: 352.63,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item107.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 108,
@@ -1159,7 +1142,7 @@ const data = [
     brand: "Brand E",
     price: 258.15,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item108.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 109,
@@ -1168,7 +1151,7 @@ const data = [
     brand: "Brand L",
     price: 104.37,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item109.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 110,
@@ -1177,7 +1160,7 @@ const data = [
     brand: "Brand J",
     price: 377.44,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item110.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 111,
@@ -1186,7 +1169,7 @@ const data = [
     brand: "Brand A",
     price: 145.45,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item111.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 112,
@@ -1195,7 +1178,7 @@ const data = [
     brand: "Brand C",
     price: 367.76,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item112.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 113,
@@ -1204,7 +1187,7 @@ const data = [
     brand: "Brand H",
     price: 36.85,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item113.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 114,
@@ -1213,7 +1196,7 @@ const data = [
     brand: "Brand K",
     price: 481.22,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item114.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 115,
@@ -1222,7 +1205,7 @@ const data = [
     brand: "Brand K",
     price: 208.29,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item115.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 116,
@@ -1231,7 +1214,7 @@ const data = [
     brand: "Brand N",
     price: 96.22,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item116.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 117,
@@ -1240,7 +1223,7 @@ const data = [
     brand: "Brand A",
     price: 455.04,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item117.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 118,
@@ -1249,7 +1232,7 @@ const data = [
     brand: "Brand A",
     price: 308.23,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item118.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 119,
@@ -1258,7 +1241,7 @@ const data = [
     brand: "Brand F",
     price: 495.28,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item119.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 120,
@@ -1267,7 +1250,7 @@ const data = [
     brand: "Brand E",
     price: 458.52,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item120.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 121,
@@ -1276,7 +1259,7 @@ const data = [
     brand: "Brand L",
     price: 77.63,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item121.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 122,
@@ -1285,7 +1268,7 @@ const data = [
     brand: "Brand K",
     price: 409.26,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item122.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 123,
@@ -1294,7 +1277,7 @@ const data = [
     brand: "Brand B",
     price: 97.64,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item123.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 124,
@@ -1303,7 +1286,7 @@ const data = [
     brand: "Brand B",
     price: 20.55,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item124.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 125,
@@ -1312,7 +1295,7 @@ const data = [
     brand: "Brand H",
     price: 96.15,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item125.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 126,
@@ -1321,7 +1304,7 @@ const data = [
     brand: "Brand N",
     price: 347.75,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item126.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 127,
@@ -1330,7 +1313,7 @@ const data = [
     brand: "Brand D",
     price: 486.89,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item127.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 128,
@@ -1339,7 +1322,7 @@ const data = [
     brand: "Brand N",
     price: 53.95,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item128.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 129,
@@ -1348,7 +1331,7 @@ const data = [
     brand: "Brand K",
     price: 382.93,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item129.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 130,
@@ -1357,7 +1340,7 @@ const data = [
     brand: "Brand I",
     price: 459.6,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item130.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 131,
@@ -1366,7 +1349,7 @@ const data = [
     brand: "Brand N",
     price: 446.29,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item131.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 132,
@@ -1375,7 +1358,7 @@ const data = [
     brand: "Brand I",
     price: 330.32,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item132.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 133,
@@ -1384,7 +1367,7 @@ const data = [
     brand: "Brand H",
     price: 273.86,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item133.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 134,
@@ -1393,7 +1376,7 @@ const data = [
     brand: "Brand E",
     price: 105.11,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item134.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 135,
@@ -1402,7 +1385,7 @@ const data = [
     brand: "Brand G",
     price: 353.96,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item135.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 136,
@@ -1411,7 +1394,7 @@ const data = [
     brand: "Brand C",
     price: 395.71,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item136.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 137,
@@ -1420,7 +1403,7 @@ const data = [
     brand: "Brand D",
     price: 208.81,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item137.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 138,
@@ -1429,7 +1412,7 @@ const data = [
     brand: "Brand E",
     price: 472.95,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item138.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 139,
@@ -1438,7 +1421,7 @@ const data = [
     brand: "Brand L",
     price: 340.39,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item139.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 140,
@@ -1447,7 +1430,7 @@ const data = [
     brand: "Brand H",
     price: 152.61,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item140.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 141,
@@ -1456,7 +1439,7 @@ const data = [
     brand: "Brand K",
     price: 290.43,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item141.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 142,
@@ -1465,7 +1448,7 @@ const data = [
     brand: "Brand G",
     price: 398.07,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item142.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 143,
@@ -1474,7 +1457,7 @@ const data = [
     brand: "Brand E",
     price: 106.46,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item143.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 144,
@@ -1483,7 +1466,7 @@ const data = [
     brand: "Brand H",
     price: 286.9,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item144.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 145,
@@ -1492,7 +1475,7 @@ const data = [
     brand: "Brand O",
     price: 350.8,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item145.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 146,
@@ -1501,7 +1484,7 @@ const data = [
     brand: "Brand E",
     price: 172.14,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item146.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 147,
@@ -1510,7 +1493,7 @@ const data = [
     brand: "Brand O",
     price: 483.71,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item147.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 148,
@@ -1519,7 +1502,7 @@ const data = [
     brand: "Brand L",
     price: 92.56,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item148.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 149,
@@ -1528,7 +1511,7 @@ const data = [
     brand: "Brand M",
     price: 52.27,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item149.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 150,
@@ -1537,7 +1520,7 @@ const data = [
     brand: "Brand O",
     price: 401.69,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item150.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 151,
@@ -1546,7 +1529,7 @@ const data = [
     brand: "Brand J",
     price: 287.62,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item151.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 152,
@@ -1555,7 +1538,7 @@ const data = [
     brand: "Brand K",
     price: 379.76,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item152.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 153,
@@ -1564,7 +1547,7 @@ const data = [
     brand: "Brand C",
     price: 399.23,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item153.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 154,
@@ -1573,7 +1556,7 @@ const data = [
     brand: "Brand I",
     price: 336.99,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item154.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 155,
@@ -1582,7 +1565,7 @@ const data = [
     brand: "Brand K",
     price: 316.91,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item155.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 156,
@@ -1591,7 +1574,7 @@ const data = [
     brand: "Brand B",
     price: 38.67,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item156.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 157,
@@ -1600,7 +1583,7 @@ const data = [
     brand: "Brand H",
     price: 328.13,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item157.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 158,
@@ -1609,7 +1592,7 @@ const data = [
     brand: "Brand O",
     price: 393.44,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item158.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 159,
@@ -1618,7 +1601,7 @@ const data = [
     brand: "Brand E",
     price: 86.07,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item159.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 160,
@@ -1627,7 +1610,7 @@ const data = [
     brand: "Brand F",
     price: 38.34,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item160.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 161,
@@ -1636,7 +1619,7 @@ const data = [
     brand: "Brand B",
     price: 213.56,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item161.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 162,
@@ -1645,7 +1628,7 @@ const data = [
     brand: "Brand A",
     price: 421.71,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item162.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 163,
@@ -1654,7 +1637,7 @@ const data = [
     brand: "Brand E",
     price: 437.71,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item163.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 164,
@@ -1663,7 +1646,7 @@ const data = [
     brand: "Brand A",
     price: 283.6,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item164.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 165,
@@ -1672,7 +1655,7 @@ const data = [
     brand: "Brand C",
     price: 238.64,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item165.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 166,
@@ -1681,7 +1664,7 @@ const data = [
     brand: "Brand N",
     price: 41.38,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item166.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 167,
@@ -1690,7 +1673,7 @@ const data = [
     brand: "Brand N",
     price: 484.49,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item167.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 168,
@@ -1699,7 +1682,7 @@ const data = [
     brand: "Brand O",
     price: 487.83,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item168.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 169,
@@ -1708,7 +1691,7 @@ const data = [
     brand: "Brand F",
     price: 50.81,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item169.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 170,
@@ -1717,7 +1700,7 @@ const data = [
     brand: "Brand K",
     price: 398.87,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item170.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 171,
@@ -1726,7 +1709,7 @@ const data = [
     brand: "Brand H",
     price: 225.21,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item171.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 172,
@@ -1735,7 +1718,7 @@ const data = [
     brand: "Brand G",
     price: 493.88,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item172.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 173,
@@ -1744,7 +1727,7 @@ const data = [
     brand: "Brand L",
     price: 169.99,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item173.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 174,
@@ -1753,7 +1736,7 @@ const data = [
     brand: "Brand J",
     price: 341.59,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item174.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 175,
@@ -1762,7 +1745,7 @@ const data = [
     brand: "Brand C",
     price: 32.05,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item175.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 176,
@@ -1771,7 +1754,7 @@ const data = [
     brand: "Brand E",
     price: 164.76,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item176.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 177,
@@ -1780,7 +1763,7 @@ const data = [
     brand: "Brand G",
     price: 347.4,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item177.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 178,
@@ -1789,7 +1772,7 @@ const data = [
     brand: "Brand F",
     price: 373.16,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item178.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 179,
@@ -1798,7 +1781,7 @@ const data = [
     brand: "Brand N",
     price: 161.99,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item179.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 180,
@@ -1807,7 +1790,7 @@ const data = [
     brand: "Brand O",
     price: 174.51,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item180.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 181,
@@ -1816,7 +1799,7 @@ const data = [
     brand: "Brand F",
     price: 170.28,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item181.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 182,
@@ -1825,7 +1808,7 @@ const data = [
     brand: "Brand C",
     price: 296.03,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item182.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 183,
@@ -1834,7 +1817,7 @@ const data = [
     brand: "Brand J",
     price: 474.13,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item183.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 184,
@@ -1843,7 +1826,7 @@ const data = [
     brand: "Brand G",
     price: 338.28,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item184.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 185,
@@ -1852,7 +1835,7 @@ const data = [
     brand: "Brand N",
     price: 307.2,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item185.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 186,
@@ -1861,7 +1844,7 @@ const data = [
     brand: "Brand M",
     price: 399.6,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item186.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 187,
@@ -1870,7 +1853,7 @@ const data = [
     brand: "Brand I",
     price: 35.48,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item187.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 188,
@@ -1879,7 +1862,7 @@ const data = [
     brand: "Brand C",
     price: 107.35,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item188.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 189,
@@ -1888,7 +1871,7 @@ const data = [
     brand: "Brand C",
     price: 250.56,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item189.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 190,
@@ -1897,7 +1880,7 @@ const data = [
     brand: "Brand I",
     price: 107.04,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item190.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 191,
@@ -1906,7 +1889,7 @@ const data = [
     brand: "Brand J",
     price: 287.36,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item191.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 192,
@@ -1915,7 +1898,7 @@ const data = [
     brand: "Brand D",
     price: 168.57,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item192.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 193,
@@ -1924,7 +1907,7 @@ const data = [
     brand: "Brand D",
     price: 391.48,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item193.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 194,
@@ -1933,7 +1916,7 @@ const data = [
     brand: "Brand N",
     price: 468.45,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item194.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 195,
@@ -1942,7 +1925,7 @@ const data = [
     brand: "Brand M",
     price: 30.53,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item195.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 196,
@@ -1951,7 +1934,7 @@ const data = [
     brand: "Brand J",
     price: 445.3,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item196.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 197,
@@ -1960,7 +1943,7 @@ const data = [
     brand: "Brand O",
     price: 366.46,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item197.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 198,
@@ -1969,7 +1952,7 @@ const data = [
     brand: "Brand M",
     price: 247.93,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item198.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 199,
@@ -1978,7 +1961,7 @@ const data = [
     brand: "Brand H",
     price: 21.61,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item199.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 200,
@@ -1987,7 +1970,7 @@ const data = [
     brand: "Brand F",
     price: 75.45,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item200.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 201,
@@ -1996,7 +1979,7 @@ const data = [
     brand: "Brand L",
     price: 480.77,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item201.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 202,
@@ -2005,7 +1988,7 @@ const data = [
     brand: "Brand H",
     price: 463.96,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item202.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 203,
@@ -2014,7 +1997,7 @@ const data = [
     brand: "Brand O",
     price: 292.12,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item203.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 204,
@@ -2023,7 +2006,7 @@ const data = [
     brand: "Brand D",
     price: 213.07,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item204.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 205,
@@ -2032,7 +2015,7 @@ const data = [
     brand: "Brand L",
     price: 469.78,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item205.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 206,
@@ -2041,7 +2024,7 @@ const data = [
     brand: "Brand D",
     price: 157.32,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item206.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 207,
@@ -2050,7 +2033,7 @@ const data = [
     brand: "Brand L",
     price: 462.01,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item207.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 208,
@@ -2059,7 +2042,7 @@ const data = [
     brand: "Brand K",
     price: 130.06,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item208.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 209,
@@ -2068,7 +2051,7 @@ const data = [
     brand: "Brand A",
     price: 262.71,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item209.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 210,
@@ -2077,7 +2060,7 @@ const data = [
     brand: "Brand N",
     price: 44.24,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item210.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 211,
@@ -2086,7 +2069,7 @@ const data = [
     brand: "Brand C",
     price: 287.71,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item211.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 212,
@@ -2095,7 +2078,7 @@ const data = [
     brand: "Brand F",
     price: 255.96,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item212.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 213,
@@ -2104,7 +2087,7 @@ const data = [
     brand: "Brand N",
     price: 409.67,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item213.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 214,
@@ -2113,7 +2096,7 @@ const data = [
     brand: "Brand G",
     price: 333.13,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item214.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 215,
@@ -2122,7 +2105,7 @@ const data = [
     brand: "Brand F",
     price: 488.57,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item215.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 216,
@@ -2131,7 +2114,7 @@ const data = [
     brand: "Brand K",
     price: 259.08,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item216.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 217,
@@ -2140,7 +2123,7 @@ const data = [
     brand: "Brand A",
     price: 441.31,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item217.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 218,
@@ -2149,7 +2132,7 @@ const data = [
     brand: "Brand I",
     price: 205.62,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item218.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 219,
@@ -2158,7 +2141,7 @@ const data = [
     brand: "Brand B",
     price: 212.66,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item219.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 220,
@@ -2167,7 +2150,7 @@ const data = [
     brand: "Brand A",
     price: 393.85,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item220.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 221,
@@ -2176,7 +2159,7 @@ const data = [
     brand: "Brand M",
     price: 472.83,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item221.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 222,
@@ -2185,7 +2168,7 @@ const data = [
     brand: "Brand N",
     price: 135.6,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item222.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 223,
@@ -2194,7 +2177,7 @@ const data = [
     brand: "Brand M",
     price: 167.78,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item223.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 224,
@@ -2203,7 +2186,7 @@ const data = [
     brand: "Brand C",
     price: 475.21,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item224.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 225,
@@ -2212,7 +2195,7 @@ const data = [
     brand: "Brand N",
     price: 259.65,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item225.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 226,
@@ -2221,7 +2204,7 @@ const data = [
     brand: "Brand J",
     price: 197.97,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item226.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 227,
@@ -2230,7 +2213,7 @@ const data = [
     brand: "Brand D",
     price: 459.81,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item227.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 228,
@@ -2239,7 +2222,7 @@ const data = [
     brand: "Brand G",
     price: 429.46,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item228.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 229,
@@ -2248,7 +2231,7 @@ const data = [
     brand: "Brand F",
     price: 471.96,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item229.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 230,
@@ -2257,7 +2240,7 @@ const data = [
     brand: "Brand C",
     price: 41.89,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item230.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 231,
@@ -2266,7 +2249,7 @@ const data = [
     brand: "Brand M",
     price: 244.49,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item231.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 232,
@@ -2275,7 +2258,7 @@ const data = [
     brand: "Brand M",
     price: 498.44,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item232.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 233,
@@ -2284,7 +2267,7 @@ const data = [
     brand: "Brand G",
     price: 258.22,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item233.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 234,
@@ -2293,7 +2276,7 @@ const data = [
     brand: "Brand A",
     price: 96.42,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item234.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 235,
@@ -2302,7 +2285,7 @@ const data = [
     brand: "Brand E",
     price: 375.91,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item235.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 236,
@@ -2311,7 +2294,7 @@ const data = [
     brand: "Brand K",
     price: 378.89,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item236.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 237,
@@ -2320,7 +2303,7 @@ const data = [
     brand: "Brand B",
     price: 90.82,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item237.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 238,
@@ -2329,7 +2312,7 @@ const data = [
     brand: "Brand J",
     price: 121.09,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item238.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 239,
@@ -2338,7 +2321,7 @@ const data = [
     brand: "Brand O",
     price: 37.26,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item239.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 240,
@@ -2347,7 +2330,7 @@ const data = [
     brand: "Brand A",
     price: 52.95,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item240.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 241,
@@ -2356,7 +2339,7 @@ const data = [
     brand: "Brand M",
     price: 287.6,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item241.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 242,
@@ -2365,7 +2348,7 @@ const data = [
     brand: "Brand B",
     price: 350.54,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item242.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 243,
@@ -2374,7 +2357,7 @@ const data = [
     brand: "Brand O",
     price: 164.19,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item243.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 244,
@@ -2383,7 +2366,7 @@ const data = [
     brand: "Brand J",
     price: 128.73,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item244.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 245,
@@ -2392,7 +2375,7 @@ const data = [
     brand: "Brand G",
     price: 100.43,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item245.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 246,
@@ -2401,7 +2384,7 @@ const data = [
     brand: "Brand M",
     price: 294.49,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item246.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 247,
@@ -2410,7 +2393,7 @@ const data = [
     brand: "Brand H",
     price: 456.35,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item247.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 248,
@@ -2419,7 +2402,7 @@ const data = [
     brand: "Brand G",
     price: 190.49,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item248.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 249,
@@ -2428,7 +2411,7 @@ const data = [
     brand: "Brand J",
     price: 439.52,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item249.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 250,
@@ -2437,7 +2420,7 @@ const data = [
     brand: "Brand C",
     price: 373.19,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item250.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 251,
@@ -2446,7 +2429,7 @@ const data = [
     brand: "Brand E",
     price: 332.19,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item251.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 252,
@@ -2455,7 +2438,7 @@ const data = [
     brand: "Brand A",
     price: 350.62,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item252.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 253,
@@ -2464,7 +2447,7 @@ const data = [
     brand: "Brand C",
     price: 271.38,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item253.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 254,
@@ -2473,7 +2456,7 @@ const data = [
     brand: "Brand E",
     price: 386.88,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item254.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 255,
@@ -2482,7 +2465,7 @@ const data = [
     brand: "Brand D",
     price: 449.27,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item255.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 256,
@@ -2491,7 +2474,7 @@ const data = [
     brand: "Brand E",
     price: 110.36,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item256.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 257,
@@ -2500,7 +2483,7 @@ const data = [
     brand: "Brand L",
     price: 483.06,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item257.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 258,
@@ -2509,7 +2492,7 @@ const data = [
     brand: "Brand I",
     price: 43.84,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item258.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 259,
@@ -2518,7 +2501,7 @@ const data = [
     brand: "Brand M",
     price: 404.84,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item259.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 260,
@@ -2527,7 +2510,7 @@ const data = [
     brand: "Brand A",
     price: 409.61,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item260.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 261,
@@ -2536,7 +2519,7 @@ const data = [
     brand: "Brand F",
     price: 291.35,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item261.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 262,
@@ -2545,7 +2528,7 @@ const data = [
     brand: "Brand G",
     price: 110.52,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item262.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 263,
@@ -2554,7 +2537,7 @@ const data = [
     brand: "Brand I",
     price: 219.99,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item263.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 264,
@@ -2563,7 +2546,7 @@ const data = [
     brand: "Brand N",
     price: 252.41,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item264.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 265,
@@ -2572,7 +2555,7 @@ const data = [
     brand: "Brand E",
     price: 386.86,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item265.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 266,
@@ -2581,7 +2564,7 @@ const data = [
     brand: "Brand G",
     price: 87.67,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item266.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 267,
@@ -2590,7 +2573,7 @@ const data = [
     brand: "Brand C",
     price: 27.37,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item267.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 268,
@@ -2599,7 +2582,7 @@ const data = [
     brand: "Brand F",
     price: 434.41,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item268.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 269,
@@ -2608,7 +2591,7 @@ const data = [
     brand: "Brand L",
     price: 234.89,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item269.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 270,
@@ -2617,7 +2600,7 @@ const data = [
     brand: "Brand E",
     price: 322.88,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item270.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 271,
@@ -2626,7 +2609,7 @@ const data = [
     brand: "Brand L",
     price: 40.51,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item271.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 272,
@@ -2635,7 +2618,7 @@ const data = [
     brand: "Brand G",
     price: 226.73,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item272.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 273,
@@ -2644,7 +2627,7 @@ const data = [
     brand: "Brand I",
     price: 252.28,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item273.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 274,
@@ -2653,7 +2636,7 @@ const data = [
     brand: "Brand C",
     price: 73.6,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item274.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 275,
@@ -2662,7 +2645,7 @@ const data = [
     brand: "Brand F",
     price: 74.82,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item275.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 276,
@@ -2671,7 +2654,7 @@ const data = [
     brand: "Brand J",
     price: 128.83,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item276.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 277,
@@ -2680,7 +2663,7 @@ const data = [
     brand: "Brand N",
     price: 153.56,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item277.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 278,
@@ -2689,7 +2672,7 @@ const data = [
     brand: "Brand I",
     price: 257.1,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item278.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 279,
@@ -2698,7 +2681,7 @@ const data = [
     brand: "Brand O",
     price: 457.75,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item279.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 280,
@@ -2707,7 +2690,7 @@ const data = [
     brand: "Brand G",
     price: 70.9,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item280.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 281,
@@ -2716,7 +2699,7 @@ const data = [
     brand: "Brand D",
     price: 312.69,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item281.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 282,
@@ -2725,7 +2708,7 @@ const data = [
     brand: "Brand H",
     price: 235.19,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item282.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 283,
@@ -2734,7 +2717,7 @@ const data = [
     brand: "Brand D",
     price: 101.27,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item283.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 284,
@@ -2743,7 +2726,7 @@ const data = [
     brand: "Brand K",
     price: 141.99,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item284.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 285,
@@ -2752,7 +2735,7 @@ const data = [
     brand: "Brand L",
     price: 378.73,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item285.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 286,
@@ -2761,7 +2744,7 @@ const data = [
     brand: "Brand L",
     price: 168.3,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item286.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 287,
@@ -2770,7 +2753,7 @@ const data = [
     brand: "Brand D",
     price: 230.99,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item287.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 288,
@@ -2779,7 +2762,7 @@ const data = [
     brand: "Brand E",
     price: 140.82,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item288.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 289,
@@ -2788,7 +2771,7 @@ const data = [
     brand: "Brand O",
     price: 80.09,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item289.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 290,
@@ -2797,7 +2780,7 @@ const data = [
     brand: "Brand E",
     price: 92.38,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item290.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 291,
@@ -2806,7 +2789,7 @@ const data = [
     brand: "Brand I",
     price: 334.98,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item291.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 292,
@@ -2815,7 +2798,7 @@ const data = [
     brand: "Brand E",
     price: 126.02,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item292.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 293,
@@ -2824,7 +2807,7 @@ const data = [
     brand: "Brand C",
     price: 78.26,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item293.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 294,
@@ -2833,7 +2816,7 @@ const data = [
     brand: "Brand J",
     price: 456.1,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item294.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 295,
@@ -2842,7 +2825,7 @@ const data = [
     brand: "Brand G",
     price: 77.27,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item295.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 296,
@@ -2851,7 +2834,7 @@ const data = [
     brand: "Brand N",
     price: 56.96,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item296.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 297,
@@ -2860,7 +2843,7 @@ const data = [
     brand: "Brand E",
     price: 284.98,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item297.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 298,
@@ -2869,7 +2852,7 @@ const data = [
     brand: "Brand I",
     price: 235.24,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item298.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 299,
@@ -2878,7 +2861,7 @@ const data = [
     brand: "Brand E",
     price: 22.62,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item299.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 300,
@@ -2887,7 +2870,7 @@ const data = [
     brand: "Brand E",
     price: 39.6,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item300.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 301,
@@ -2896,7 +2879,7 @@ const data = [
     brand: "Brand F",
     price: 351.53,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item301.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 302,
@@ -2905,7 +2888,7 @@ const data = [
     brand: "Brand K",
     price: 214.86,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item302.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 303,
@@ -2914,7 +2897,7 @@ const data = [
     brand: "Brand C",
     price: 56.94,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item303.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 304,
@@ -2923,7 +2906,7 @@ const data = [
     brand: "Brand O",
     price: 143.59,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item304.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 305,
@@ -2932,7 +2915,7 @@ const data = [
     brand: "Brand A",
     price: 91.26,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item305.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 306,
@@ -2941,7 +2924,7 @@ const data = [
     brand: "Brand D",
     price: 200.95,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item306.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 307,
@@ -2950,7 +2933,7 @@ const data = [
     brand: "Brand I",
     price: 46.84,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item307.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 308,
@@ -2959,7 +2942,7 @@ const data = [
     brand: "Brand B",
     price: 477.15,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item308.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 309,
@@ -2968,7 +2951,7 @@ const data = [
     brand: "Brand B",
     price: 422.56,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item309.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 310,
@@ -2977,7 +2960,7 @@ const data = [
     brand: "Brand K",
     price: 207.75,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item310.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 311,
@@ -2986,7 +2969,7 @@ const data = [
     brand: "Brand M",
     price: 390.71,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item311.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 312,
@@ -2995,7 +2978,7 @@ const data = [
     brand: "Brand F",
     price: 44.32,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item312.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 313,
@@ -3004,7 +2987,7 @@ const data = [
     brand: "Brand G",
     price: 352.15,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item313.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 314,
@@ -3013,7 +2996,7 @@ const data = [
     brand: "Brand A",
     price: 173.39,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item314.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 315,
@@ -3022,7 +3005,7 @@ const data = [
     brand: "Brand M",
     price: 118.1,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item315.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 316,
@@ -3031,7 +3014,7 @@ const data = [
     brand: "Brand K",
     price: 77.4,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item316.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 317,
@@ -3040,7 +3023,7 @@ const data = [
     brand: "Brand G",
     price: 301.16,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item317.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 318,
@@ -3049,7 +3032,7 @@ const data = [
     brand: "Brand G",
     price: 150.13,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item318.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 319,
@@ -3058,7 +3041,7 @@ const data = [
     brand: "Brand E",
     price: 272.39,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item319.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 320,
@@ -3067,7 +3050,7 @@ const data = [
     brand: "Brand L",
     price: 99.61,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item320.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 321,
@@ -3076,7 +3059,7 @@ const data = [
     brand: "Brand F",
     price: 300.85,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item321.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 322,
@@ -3085,7 +3068,7 @@ const data = [
     brand: "Brand A",
     price: 245.33,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item322.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 323,
@@ -3094,7 +3077,7 @@ const data = [
     brand: "Brand F",
     price: 161.54,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item323.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 324,
@@ -3103,7 +3086,7 @@ const data = [
     brand: "Brand B",
     price: 54.9,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item324.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 325,
@@ -3112,7 +3095,7 @@ const data = [
     brand: "Brand G",
     price: 465.26,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item325.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 326,
@@ -3121,7 +3104,7 @@ const data = [
     brand: "Brand K",
     price: 317.54,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item326.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 327,
@@ -3130,7 +3113,7 @@ const data = [
     brand: "Brand C",
     price: 117.02,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item327.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 328,
@@ -3139,7 +3122,7 @@ const data = [
     brand: "Brand E",
     price: 24.11,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item328.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 329,
@@ -3148,7 +3131,7 @@ const data = [
     brand: "Brand J",
     price: 389.73,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item329.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 330,
@@ -3157,7 +3140,7 @@ const data = [
     brand: "Brand F",
     price: 169.87,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item330.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 331,
@@ -3166,7 +3149,7 @@ const data = [
     brand: "Brand E",
     price: 265.46,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item331.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 332,
@@ -3175,7 +3158,7 @@ const data = [
     brand: "Brand G",
     price: 70.97,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item332.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 333,
@@ -3184,7 +3167,7 @@ const data = [
     brand: "Brand H",
     price: 304.67,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item333.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 334,
@@ -3193,7 +3176,7 @@ const data = [
     brand: "Brand B",
     price: 97.75,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item334.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 335,
@@ -3202,7 +3185,7 @@ const data = [
     brand: "Brand C",
     price: 333.34,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item335.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 336,
@@ -3211,7 +3194,7 @@ const data = [
     brand: "Brand J",
     price: 329.33,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item336.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 337,
@@ -3220,7 +3203,7 @@ const data = [
     brand: "Brand M",
     price: 426.04,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item337.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 338,
@@ -3229,7 +3212,7 @@ const data = [
     brand: "Brand F",
     price: 251.14,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item338.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 339,
@@ -3238,7 +3221,7 @@ const data = [
     brand: "Brand J",
     price: 389.45,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item339.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 340,
@@ -3247,7 +3230,7 @@ const data = [
     brand: "Brand K",
     price: 140.25,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item340.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 341,
@@ -3256,7 +3239,7 @@ const data = [
     brand: "Brand D",
     price: 191.52,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item341.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 342,
@@ -3265,7 +3248,7 @@ const data = [
     brand: "Brand B",
     price: 456.13,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item342.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 343,
@@ -3274,7 +3257,7 @@ const data = [
     brand: "Brand G",
     price: 84.66,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item343.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 344,
@@ -3283,7 +3266,7 @@ const data = [
     brand: "Brand H",
     price: 112.27,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item344.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 345,
@@ -3292,7 +3275,7 @@ const data = [
     brand: "Brand F",
     price: 84.86,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item345.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 346,
@@ -3301,7 +3284,7 @@ const data = [
     brand: "Brand E",
     price: 72.93,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item346.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 347,
@@ -3310,7 +3293,7 @@ const data = [
     brand: "Brand J",
     price: 390.35,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item347.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 348,
@@ -3319,7 +3302,7 @@ const data = [
     brand: "Brand J",
     price: 61.17,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item348.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 349,
@@ -3328,7 +3311,7 @@ const data = [
     brand: "Brand H",
     price: 66.39,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item349.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 350,
@@ -3337,7 +3320,7 @@ const data = [
     brand: "Brand E",
     price: 160.88,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item350.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 351,
@@ -3346,7 +3329,7 @@ const data = [
     brand: "Brand D",
     price: 83.1,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item351.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 352,
@@ -3355,7 +3338,7 @@ const data = [
     brand: "Brand E",
     price: 485.13,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item352.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 353,
@@ -3364,7 +3347,7 @@ const data = [
     brand: "Brand M",
     price: 410.99,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item353.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 354,
@@ -3373,7 +3356,7 @@ const data = [
     brand: "Brand G",
     price: 56.98,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item354.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 355,
@@ -3382,7 +3365,7 @@ const data = [
     brand: "Brand O",
     price: 414.01,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item355.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 356,
@@ -3391,7 +3374,7 @@ const data = [
     brand: "Brand O",
     price: 244.24,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item356.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 357,
@@ -3400,7 +3383,7 @@ const data = [
     brand: "Brand D",
     price: 22.0,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item357.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 358,
@@ -3409,7 +3392,7 @@ const data = [
     brand: "Brand D",
     price: 497.37,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item358.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 359,
@@ -3418,7 +3401,7 @@ const data = [
     brand: "Brand O",
     price: 481.51,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item359.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 360,
@@ -3427,7 +3410,7 @@ const data = [
     brand: "Brand J",
     price: 195.3,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item360.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 361,
@@ -3436,7 +3419,7 @@ const data = [
     brand: "Brand J",
     price: 200.95,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item361.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 362,
@@ -3445,7 +3428,7 @@ const data = [
     brand: "Brand L",
     price: 387.93,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item362.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 363,
@@ -3454,7 +3437,7 @@ const data = [
     brand: "Brand G",
     price: 40.6,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item363.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 364,
@@ -3463,7 +3446,7 @@ const data = [
     brand: "Brand G",
     price: 201.32,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item364.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 365,
@@ -3472,7 +3455,7 @@ const data = [
     brand: "Brand H",
     price: 403.14,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item365.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 366,
@@ -3481,7 +3464,7 @@ const data = [
     brand: "Brand B",
     price: 449.01,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item366.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 367,
@@ -3490,7 +3473,7 @@ const data = [
     brand: "Brand F",
     price: 247.74,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item367.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 368,
@@ -3499,7 +3482,7 @@ const data = [
     brand: "Brand G",
     price: 387.76,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item368.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 369,
@@ -3508,7 +3491,7 @@ const data = [
     brand: "Brand M",
     price: 224.23,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item369.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 370,
@@ -3517,7 +3500,7 @@ const data = [
     brand: "Brand F",
     price: 229.44,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item370.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 371,
@@ -3526,7 +3509,7 @@ const data = [
     brand: "Brand I",
     price: 144.67,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item371.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 372,
@@ -3535,7 +3518,7 @@ const data = [
     brand: "Brand C",
     price: 257.28,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item372.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 373,
@@ -3544,7 +3527,7 @@ const data = [
     brand: "Brand G",
     price: 273.46,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item373.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 374,
@@ -3553,7 +3536,7 @@ const data = [
     brand: "Brand K",
     price: 84.8,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item374.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 375,
@@ -3562,7 +3545,7 @@ const data = [
     brand: "Brand H",
     price: 487.09,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item375.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 376,
@@ -3571,7 +3554,7 @@ const data = [
     brand: "Brand L",
     price: 214.44,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item376.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 377,
@@ -3580,7 +3563,7 @@ const data = [
     brand: "Brand G",
     price: 29.56,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item377.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 378,
@@ -3589,7 +3572,7 @@ const data = [
     brand: "Brand N",
     price: 246.76,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item378.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 379,
@@ -3598,7 +3581,7 @@ const data = [
     brand: "Brand D",
     price: 288.23,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item379.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 380,
@@ -3607,7 +3590,7 @@ const data = [
     brand: "Brand G",
     price: 175.51,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item380.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 381,
@@ -3616,7 +3599,7 @@ const data = [
     brand: "Brand G",
     price: 92.83,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item381.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 382,
@@ -3625,7 +3608,7 @@ const data = [
     brand: "Brand K",
     price: 163.99,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item382.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 383,
@@ -3634,7 +3617,7 @@ const data = [
     brand: "Brand A",
     price: 467.28,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item383.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 384,
@@ -3643,7 +3626,7 @@ const data = [
     brand: "Brand I",
     price: 390.03,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item384.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 385,
@@ -3652,7 +3635,7 @@ const data = [
     brand: "Brand G",
     price: 370.25,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item385.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 386,
@@ -3661,7 +3644,7 @@ const data = [
     brand: "Brand J",
     price: 140.76,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item386.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 387,
@@ -3670,7 +3653,7 @@ const data = [
     brand: "Brand J",
     price: 464.9,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item387.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 388,
@@ -3679,7 +3662,7 @@ const data = [
     brand: "Brand D",
     price: 383.4,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item388.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 389,
@@ -3688,7 +3671,7 @@ const data = [
     brand: "Brand J",
     price: 450.21,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item389.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 390,
@@ -3697,7 +3680,7 @@ const data = [
     brand: "Brand H",
     price: 201.55,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item390.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 391,
@@ -3706,7 +3689,7 @@ const data = [
     brand: "Brand D",
     price: 99.29,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item391.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 392,
@@ -3715,7 +3698,7 @@ const data = [
     brand: "Brand H",
     price: 442.72,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item392.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 393,
@@ -3724,7 +3707,7 @@ const data = [
     brand: "Brand D",
     price: 405.45,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item393.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 394,
@@ -3733,7 +3716,7 @@ const data = [
     brand: "Brand F",
     price: 120.17,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item394.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 395,
@@ -3742,7 +3725,7 @@ const data = [
     brand: "Brand D",
     price: 324.19,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item395.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 396,
@@ -3751,7 +3734,7 @@ const data = [
     brand: "Brand H",
     price: 315.72,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item396.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 397,
@@ -3760,7 +3743,7 @@ const data = [
     brand: "Brand F",
     price: 315.3,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item397.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 398,
@@ -3769,7 +3752,7 @@ const data = [
     brand: "Brand L",
     price: 85.2,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item398.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 399,
@@ -3778,7 +3761,7 @@ const data = [
     brand: "Brand H",
     price: 36.48,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item399.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 400,
@@ -3787,7 +3770,7 @@ const data = [
     brand: "Brand J",
     price: 418.5,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item400.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 401,
@@ -3796,7 +3779,7 @@ const data = [
     brand: "Brand H",
     price: 239.46,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item401.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 402,
@@ -3805,7 +3788,7 @@ const data = [
     brand: "Brand O",
     price: 495.49,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item402.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 403,
@@ -3814,7 +3797,7 @@ const data = [
     brand: "Brand B",
     price: 411.58,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item403.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 404,
@@ -3823,7 +3806,7 @@ const data = [
     brand: "Brand B",
     price: 191.05,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item404.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 405,
@@ -3832,7 +3815,7 @@ const data = [
     brand: "Brand D",
     price: 202.82,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item405.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 406,
@@ -3841,7 +3824,7 @@ const data = [
     brand: "Brand C",
     price: 27.34,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item406.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 407,
@@ -3850,7 +3833,7 @@ const data = [
     brand: "Brand K",
     price: 159.77,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item407.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 408,
@@ -3859,7 +3842,7 @@ const data = [
     brand: "Brand K",
     price: 489.68,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item408.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 409,
@@ -3868,7 +3851,7 @@ const data = [
     brand: "Brand F",
     price: 87.64,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item409.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 410,
@@ -3877,7 +3860,7 @@ const data = [
     brand: "Brand O",
     price: 127.55,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item410.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 411,
@@ -3886,7 +3869,7 @@ const data = [
     brand: "Brand N",
     price: 325.49,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item411.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 412,
@@ -3895,7 +3878,7 @@ const data = [
     brand: "Brand I",
     price: 262.8,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item412.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 413,
@@ -3904,7 +3887,7 @@ const data = [
     brand: "Brand J",
     price: 299.39,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item413.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 414,
@@ -3913,7 +3896,7 @@ const data = [
     brand: "Brand A",
     price: 337.15,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item414.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 415,
@@ -3922,7 +3905,7 @@ const data = [
     brand: "Brand J",
     price: 443.49,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item415.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 416,
@@ -3931,7 +3914,7 @@ const data = [
     brand: "Brand F",
     price: 129.47,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item416.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 417,
@@ -3940,7 +3923,7 @@ const data = [
     brand: "Brand L",
     price: 329.66,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item417.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 418,
@@ -3949,7 +3932,7 @@ const data = [
     brand: "Brand H",
     price: 446.72,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item418.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 419,
@@ -3958,7 +3941,7 @@ const data = [
     brand: "Brand D",
     price: 89.31,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item419.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 420,
@@ -3967,7 +3950,7 @@ const data = [
     brand: "Brand A",
     price: 94.7,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item420.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 421,
@@ -3976,7 +3959,7 @@ const data = [
     brand: "Brand N",
     price: 190.82,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item421.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 422,
@@ -3985,7 +3968,7 @@ const data = [
     brand: "Brand D",
     price: 197.41,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item422.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 423,
@@ -3994,7 +3977,7 @@ const data = [
     brand: "Brand J",
     price: 112.01,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item423.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 424,
@@ -4003,7 +3986,7 @@ const data = [
     brand: "Brand O",
     price: 273.16,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item424.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 425,
@@ -4012,7 +3995,7 @@ const data = [
     brand: "Brand I",
     price: 325.78,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item425.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 426,
@@ -4021,7 +4004,7 @@ const data = [
     brand: "Brand N",
     price: 80.7,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item426.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 427,
@@ -4030,7 +4013,7 @@ const data = [
     brand: "Brand K",
     price: 145.73,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item427.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 428,
@@ -4039,7 +4022,7 @@ const data = [
     brand: "Brand L",
     price: 59.44,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item428.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 429,
@@ -4048,7 +4031,7 @@ const data = [
     brand: "Brand O",
     price: 296.78,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item429.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 430,
@@ -4057,7 +4040,7 @@ const data = [
     brand: "Brand F",
     price: 463.85,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item430.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 431,
@@ -4066,7 +4049,7 @@ const data = [
     brand: "Brand G",
     price: 62.8,
     rating: 4.5,
-    imageUrl: "https://example.com/mock-images/item431.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 432,
@@ -4075,7 +4058,7 @@ const data = [
     brand: "Brand I",
     price: 324.1,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item432.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 433,
@@ -4084,7 +4067,7 @@ const data = [
     brand: "Brand N",
     price: 125.6,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item433.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 434,
@@ -4093,7 +4076,7 @@ const data = [
     brand: "Brand J",
     price: 327.07,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item434.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 435,
@@ -4102,7 +4085,7 @@ const data = [
     brand: "Brand A",
     price: 354.1,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item435.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 436,
@@ -4111,7 +4094,7 @@ const data = [
     brand: "Brand O",
     price: 29.48,
     rating: 5.0,
-    imageUrl: "https://example.com/mock-images/item436.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 437,
@@ -4120,7 +4103,7 @@ const data = [
     brand: "Brand H",
     price: 102.12,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item437.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 438,
@@ -4129,7 +4112,7 @@ const data = [
     brand: "Brand O",
     price: 450.01,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item438.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 439,
@@ -4138,7 +4121,7 @@ const data = [
     brand: "Brand C",
     price: 169.05,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item439.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 440,
@@ -4147,7 +4130,7 @@ const data = [
     brand: "Brand N",
     price: 349.14,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item440.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 441,
@@ -4156,7 +4139,7 @@ const data = [
     brand: "Brand M",
     price: 100.13,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item441.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 442,
@@ -4165,7 +4148,7 @@ const data = [
     brand: "Brand K",
     price: 287.01,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item442.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 443,
@@ -4174,7 +4157,7 @@ const data = [
     brand: "Brand I",
     price: 230.97,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item443.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 444,
@@ -4183,7 +4166,7 @@ const data = [
     brand: "Brand L",
     price: 287.35,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item444.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 445,
@@ -4192,7 +4175,7 @@ const data = [
     brand: "Brand D",
     price: 152.67,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item445.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 446,
@@ -4201,7 +4184,7 @@ const data = [
     brand: "Brand B",
     price: 132.98,
     rating: 3.2,
-    imageUrl: "https://example.com/mock-images/item446.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 447,
@@ -4210,7 +4193,7 @@ const data = [
     brand: "Brand C",
     price: 38.41,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item447.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 448,
@@ -4219,7 +4202,7 @@ const data = [
     brand: "Brand H",
     price: 263.36,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item448.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 449,
@@ -4228,7 +4211,7 @@ const data = [
     brand: "Brand H",
     price: 64.38,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item449.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 450,
@@ -4237,7 +4220,7 @@ const data = [
     brand: "Brand A",
     price: 411.04,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item450.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 451,
@@ -4246,7 +4229,7 @@ const data = [
     brand: "Brand F",
     price: 217.63,
     rating: 4.1,
-    imageUrl: "https://example.com/mock-images/item451.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 452,
@@ -4255,7 +4238,7 @@ const data = [
     brand: "Brand N",
     price: 216.53,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item452.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 453,
@@ -4264,7 +4247,7 @@ const data = [
     brand: "Brand J",
     price: 363.74,
     rating: 4.3,
-    imageUrl: "https://example.com/mock-images/item453.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 454,
@@ -4273,7 +4256,7 @@ const data = [
     brand: "Brand J",
     price: 266.09,
     rating: 4.0,
-    imageUrl: "https://example.com/mock-images/item454.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 455,
@@ -4282,7 +4265,7 @@ const data = [
     brand: "Brand F",
     price: 86.7,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item455.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 456,
@@ -4291,7 +4274,7 @@ const data = [
     brand: "Brand C",
     price: 153.07,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item456.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 457,
@@ -4300,7 +4283,7 @@ const data = [
     brand: "Brand L",
     price: 98.1,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item457.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 458,
@@ -4309,7 +4292,7 @@ const data = [
     brand: "Brand L",
     price: 248.27,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item458.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 459,
@@ -4318,7 +4301,7 @@ const data = [
     brand: "Brand O",
     price: 286.11,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item459.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 460,
@@ -4327,7 +4310,7 @@ const data = [
     brand: "Brand F",
     price: 425.99,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item460.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 461,
@@ -4336,7 +4319,7 @@ const data = [
     brand: "Brand J",
     price: 172.52,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item461.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 462,
@@ -4345,7 +4328,7 @@ const data = [
     brand: "Brand B",
     price: 247.41,
     rating: 3.4,
-    imageUrl: "https://example.com/mock-images/item462.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 463,
@@ -4354,7 +4337,7 @@ const data = [
     brand: "Brand I",
     price: 432.31,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item463.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 464,
@@ -4363,7 +4346,7 @@ const data = [
     brand: "Brand D",
     price: 412.83,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item464.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 465,
@@ -4372,7 +4355,7 @@ const data = [
     brand: "Brand L",
     price: 477.61,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item465.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 466,
@@ -4381,7 +4364,7 @@ const data = [
     brand: "Brand H",
     price: 158.03,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item466.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 467,
@@ -4390,7 +4373,7 @@ const data = [
     brand: "Brand D",
     price: 383.08,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item467.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 468,
@@ -4399,7 +4382,7 @@ const data = [
     brand: "Brand N",
     price: 106.08,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item468.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 469,
@@ -4408,7 +4391,7 @@ const data = [
     brand: "Brand J",
     price: 256.34,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item469.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 470,
@@ -4417,7 +4400,7 @@ const data = [
     brand: "Brand F",
     price: 65.2,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item470.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 471,
@@ -4426,7 +4409,7 @@ const data = [
     brand: "Brand L",
     price: 305.07,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item471.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 472,
@@ -4435,7 +4418,7 @@ const data = [
     brand: "Brand L",
     price: 28.36,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item472.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 473,
@@ -4444,7 +4427,7 @@ const data = [
     brand: "Brand O",
     price: 137.14,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item473.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 474,
@@ -4453,7 +4436,7 @@ const data = [
     brand: "Brand B",
     price: 343.12,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item474.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 475,
@@ -4462,7 +4445,7 @@ const data = [
     brand: "Brand J",
     price: 379.64,
     rating: 4.7,
-    imageUrl: "https://example.com/mock-images/item475.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 476,
@@ -4471,7 +4454,7 @@ const data = [
     brand: "Brand K",
     price: 108.29,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item476.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 477,
@@ -4480,7 +4463,7 @@ const data = [
     brand: "Brand K",
     price: 234.22,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item477.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 478,
@@ -4489,7 +4472,7 @@ const data = [
     brand: "Brand F",
     price: 162.6,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item478.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 479,
@@ -4498,7 +4481,7 @@ const data = [
     brand: "Brand F",
     price: 48.24,
     rating: 3.0,
-    imageUrl: "https://example.com/mock-images/item479.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 480,
@@ -4507,7 +4490,7 @@ const data = [
     brand: "Brand K",
     price: 452.79,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item480.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 481,
@@ -4516,7 +4499,7 @@ const data = [
     brand: "Brand A",
     price: 32.23,
     rating: 3.8,
-    imageUrl: "https://example.com/mock-images/item481.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 482,
@@ -4525,7 +4508,7 @@ const data = [
     brand: "Brand I",
     price: 497.78,
     rating: 3.3,
-    imageUrl: "https://example.com/mock-images/item482.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 483,
@@ -4534,7 +4517,7 @@ const data = [
     brand: "Brand O",
     price: 130.87,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item483.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 484,
@@ -4543,7 +4526,7 @@ const data = [
     brand: "Brand O",
     price: 22.68,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item484.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 485,
@@ -4552,7 +4535,7 @@ const data = [
     brand: "Brand N",
     price: 141.52,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item485.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 486,
@@ -4561,7 +4544,7 @@ const data = [
     brand: "Brand G",
     price: 254.69,
     rating: 4.8,
-    imageUrl: "https://example.com/mock-images/item486.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 487,
@@ -4570,7 +4553,7 @@ const data = [
     brand: "Brand N",
     price: 163.57,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item487.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 488,
@@ -4579,7 +4562,7 @@ const data = [
     brand: "Brand C",
     price: 156.44,
     rating: 4.9,
-    imageUrl: "https://example.com/mock-images/item488.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 489,
@@ -4588,7 +4571,7 @@ const data = [
     brand: "Brand I",
     price: 224.78,
     rating: 3.7,
-    imageUrl: "https://example.com/mock-images/item489.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 490,
@@ -4597,7 +4580,7 @@ const data = [
     brand: "Brand B",
     price: 497.4,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item490.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 491,
@@ -4606,7 +4589,7 @@ const data = [
     brand: "Brand K",
     price: 416.23,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item491.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 492,
@@ -4615,7 +4598,7 @@ const data = [
     brand: "Brand L",
     price: 421.05,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item492.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 493,
@@ -4624,7 +4607,7 @@ const data = [
     brand: "Brand H",
     price: 497.64,
     rating: 3.9,
-    imageUrl: "https://example.com/mock-images/item493.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 494,
@@ -4633,7 +4616,7 @@ const data = [
     brand: "Brand H",
     price: 377.73,
     rating: 4.2,
-    imageUrl: "https://example.com/mock-images/item494.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 495,
@@ -4642,7 +4625,7 @@ const data = [
     brand: "Brand H",
     price: 352.63,
     rating: 3.6,
-    imageUrl: "https://example.com/mock-images/item495.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 496,
@@ -4651,7 +4634,7 @@ const data = [
     brand: "Brand I",
     price: 101.94,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item496.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 497,
@@ -4660,7 +4643,7 @@ const data = [
     brand: "Brand M",
     price: 322.62,
     rating: 4.4,
-    imageUrl: "https://example.com/mock-images/item497.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 498,
@@ -4669,7 +4652,7 @@ const data = [
     brand: "Brand B",
     price: 201.55,
     rating: 4.6,
-    imageUrl: "https://example.com/mock-images/item498.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 499,
@@ -4678,7 +4661,7 @@ const data = [
     brand: "Brand E",
     price: 350.77,
     rating: 3.5,
-    imageUrl: "https://example.com/mock-images/item499.jpg",
+    imageUrl: "/medium.webp",
   },
   {
     id: 500,
@@ -4687,6 +4670,6 @@ const data = [
     brand: "Brand L",
     price: 468.97,
     rating: 3.1,
-    imageUrl: "https://example.com/mock-images/item500.jpg",
+    imageUrl: "/medium.webp",
   },
 ];
