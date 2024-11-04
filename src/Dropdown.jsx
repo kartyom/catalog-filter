@@ -10,10 +10,19 @@ const DropdownProps = {
   zIndex: PropTypes.number,
   name: PropTypes.string,
   isResetable: PropTypes.bool,
+  dataTestId: PropTypes.string,
 };
 
 export function Dropdown(props) {
-  const { name, data, select, initialSelected, zIndex, isResetable } = props;
+  const {
+    name,
+    data,
+    select,
+    initialSelected,
+    zIndex,
+    isResetable,
+    dataTestId,
+  } = props;
   const [selected, setSelected] = useState(initialSelected);
   const [focus, setFocus] = useState(false);
 
@@ -35,11 +44,12 @@ export function Dropdown(props) {
   }, [name]);
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div data-testid={dataTestId} className="w-full flex flex-col gap-1">
       <div className="w-full flex items-center justify-between">
         <span className="font-500 text-[16px]">{name}</span>
         {isResetable && (
           <button
+			data-testid={`${dataTestId}-option-reset`}
             onClick={() => {
               setSelected(null);
               select(null);
@@ -53,6 +63,7 @@ export function Dropdown(props) {
         <button
           onClick={() => setFocus((o) => !o)}
           disabled={data.length === 0}
+          data-testid={`${dataTestId}-toggle`}
           className={clsx(
             "flex items-center border border-gray-300",
             "w-full p-[8px] rounded-md justify-between",
@@ -83,6 +94,7 @@ export function Dropdown(props) {
             {data.map((item, index) => (
               <button
                 key={index}
+				data-testid={`${dataTestId}-option-${item}`}
                 onClick={() => {
                   select(item);
                   setSelected(item);

@@ -56,6 +56,7 @@ export function Header() {
   return (
     <>
       <div
+        data-testid="header"
         className={clsx(
           isClosed
             ? "desktop:left-[0px] desktop:w-screen"

@@ -33,6 +33,7 @@ export function Sidebar() {
   return (
     <>
       <div
+        data-testid="sidebar"
         id="dashboard-sidebar-bg"
         className={clsx(
           isClosed ? " pointer-events-none opacity-0" : "opacity-100",
@@ -85,7 +86,8 @@ export function Sidebar() {
           >
             <Dropdown
               name="Category"
-              data={categories.data ?? []}
+              dataTestId="category-filter"
+              data={categories?.data ?? []}
               initialSelected={filters.category}
               select={selectCategory}
               zIndex={10}
@@ -94,7 +96,7 @@ export function Sidebar() {
 
             <Dropdown
               name="Brand"
-              data={brands.data ?? []}
+              data={brands?.data ?? []}
               initialSelected={filters.brand}
               select={selectBrand}
               zIndex={0}
@@ -103,14 +105,14 @@ export function Sidebar() {
 
             <Slider
               name="Rating"
-              initialValue={filters.rating ?? 0}
+              initialValue={filters?.rating ?? 5}
               percent={20}
               setValue={selectRating}
             />
 
             <Slider
               name="Price"
-              initialValue={filters.price ?? 0}
+              initialValue={filters?.price ?? 1000}
               percent={0.1}
               setValue={selectPrice}
             />

@@ -5,9 +5,10 @@ const RatingPropTypes = {
 };
 
 export function Rating(props) {
-  const fullStars = Math.floor(props.rate);
-  const hasHalfStar = props.rate % 1 !== 0;
-  const emptyStars = 5 - Math.ceil(props.rate);
+  const { rate } = props;
+  const fullStars = Math.floor(rate ?? 5);
+  const hasHalfStar = rate % 1 !== 0;
+  const emptyStars = 5 - Math.ceil(rate ?? 0);
 
   return (
     <div className="flex gap-1 items-center">

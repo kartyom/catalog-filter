@@ -171,11 +171,11 @@ async function sleep(millis) {
 /**
  * @type Item[]
  */
-const data = [
+export const data = [
   {
     id: 1,
     name: "Leather Jacket",
-    category: "Category 39",
+    category: "Electronics",
     brand: "Brand E",
     price: 75.34,
     rating: 4.2,
@@ -184,7 +184,7 @@ const data = [
   {
     id: 2,
     name: "Bluetooth Speaker",
-    category: "Category 28",
+    category: "Electronics",
     brand: "Brand G",
     price: 195.16,
     rating: 3.6,
@@ -4657,7 +4657,7 @@ const data = [
   {
     id: 499,
     name: "Bluetooth Speaker",
-    category: "Category 16",
+    category: "Electronics",
     brand: "Brand E",
     price: 350.77,
     rating: 3.5,
@@ -4666,7 +4666,7 @@ const data = [
   {
     id: 500,
     name: "Leather Jacket",
-    category: "Category 11",
+    category: "Electronics",
     brand: "Brand L",
     price: 468.97,
     rating: 3.1,
