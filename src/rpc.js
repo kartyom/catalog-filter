@@ -48,10 +48,19 @@ export async function getAllBrands() {
 /**
  * @param {string} query
  * @param {Filters} filters
+ * @param {string} rating
+ * @param {string} price
  * @param {number} offset
  * @param {number} limit
  */
-export async function findItems(query, filters, offset, limit = LIMIT) {
+export async function findItems(
+  query,
+  filters,
+  rating,
+  price,
+  offset,
+  limit = LIMIT,
+) {
   await sleep(1500);
 
   const priceFilter = isPriceInRange(filters.price);
@@ -59,6 +68,8 @@ export async function findItems(query, filters, offset, limit = LIMIT) {
   const categoryFilter = isCategorySame(filters.category);
   const brandFilter = isBrandSame(filters.brand);
   const queryFilter = isQuerySimilar(query);
+  const sortRatingCallback = sortRating(rating);
+  const sortPriceCallback = sortPrice(price);
 
   return data
     .filter(priceFilter)
@@ -66,7 +77,29 @@ export async function findItems(query, filters, offset, limit = LIMIT) {
     .filter(categoryFilter)
     .filter(brandFilter)
     .filter(queryFilter)
+    .sort(sortRatingCallback)
+    .sort(sortPriceCallback)
     .slice(Number(offset), Number(offset) + Number(limit));
+}
+
+function sortRating(rating) {
+  return function (a, b) {
+    if (rating === "lowest") {
+      return a.rating - b.rating;
+    } else if (rating === "highest") {
+      return b.rating - a.rating;
+    }
+  };
+}
+
+function sortPrice(price) {
+  return function (a, b) {
+    if (price === "lowest") {
+      return a.price - b.price;
+    } else if (price === "highest") {
+      return b.price - a.price;
+    }
+  };
 }
 
 /**

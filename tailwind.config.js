@@ -4,6 +4,7 @@ export default {
   theme: {
     animation: {
       loading: "loading 1s ease-out infinite",
+      spin: "spin 1s infinite linear",
     },
     keyframes: {
       loading: {
@@ -18,6 +19,14 @@ export default {
         "100%": {
           opacity: 0.4,
           transform: "translateY(-3px)",
+        },
+      },
+      spin: {
+        from: {
+          transform: "rotate(0deg)",
+        },
+        to: {
+          transform: "rotate(360deg)",
         },
       },
     },

@@ -8,8 +8,8 @@ const CATALOG_FILTERS_KEY = "catalog-filters-history";
 const initialState = {
   isClosed: true,
   query: "",
-  ratingSort: "as lowest",
-  priceSort: "as highest",
+  ratingSort: "lowest",
+  priceSort: "highest",
 };
 
 /** @import {Filters} from "./rpc" */

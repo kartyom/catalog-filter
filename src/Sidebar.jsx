@@ -120,7 +120,7 @@ export function Sidebar() {
             <div className="flex items-center w-full gap-1">
               <Dropdown
                 name="Sort by rating"
-                data={["as lowest", "as highest"]}
+                data={["lowest", "highest"]}
                 initialSelected={ratingSort}
                 select={changeRatingSort}
                 zIndex={0}
@@ -128,7 +128,7 @@ export function Sidebar() {
               />
               <Dropdown
                 name="Sort by price"
-                data={["as lowest", "as highest"]}
+                data={["lowest", "highest"]}
                 initialSelected={priceSort}
                 select={changePriceSort}
                 zIndex={0}

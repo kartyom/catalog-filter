@@ -87,7 +87,7 @@ export function Dropdown(props) {
             className={clsx(
               focus ? "flex" : "hidden",
               "absolute flex-col rounded-md overflow-y-scroll top-[45px]",
-              "bg-gray-100 flex w-full z-50 max-h-[200px] px-2 py-1",
+              "bg-gray-100 flex w-full z-50 max-h-[200px] px-2 py-1 no-scrollbar",
               name,
             )}
           >
