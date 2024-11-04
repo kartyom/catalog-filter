@@ -143,7 +143,7 @@ function App() {
                     key={item.id}
                     className={clsx(
                       "bg-gray-200 w-full rounded-md flex",
-                      "p-[8px] flex-col",
+                      "p-[8px] flex-col max-h-[140px]",
                     )}
                   >
                     <div className="flex gap-[10px]">
