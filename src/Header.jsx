@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Menu, Search } from "lucide-react";
 import { useState, useEffect, useContext } from "react";
-import { useShortCut } from "./hooks/useShortcut";
+import { useShortCut } from "./hooks/useShortCut";
 import { AppContext } from "./hooks/useAppContext";
 
 export function Header() {
